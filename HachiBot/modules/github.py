@@ -36,7 +36,7 @@ from telegram import (
     MAX_MESSAGE_LENGTH,
 )
 
-__mod_name__ = "Github"
+__mod_name__ = "Github +"
 
 
 @pgram.on_message(filters.command("github"))
