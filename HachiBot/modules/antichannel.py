@@ -3,6 +3,14 @@ import html
 from telegram.ext.filters import Filters
 from telegram import Update, message, ParseMode
 from telegram.ext import CallbackContext
+from telegram.error import (
+    BadRequest,
+    ChatMigrated,
+    NetworkError,
+    TelegramError,
+    TimedOut,
+    Unauthorized,
+)
 
 import HachiBot.modules.sql.antilinkedchannel_sql as sql
 from HachiBot.modules.helper_funcs.decorators import ddocmd, ddomsg
