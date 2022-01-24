@@ -233,6 +233,10 @@ def user_admin_no_reply(func):
     return is_not_admin_no_reply
 
 
+def callbacks_in_filters(data):
+    return filters.create(lambda flt, _, query: flt.data in query.data, data=data)
+
+
 def user_not_admin(func):
     @wraps(func)
     def is_not_admin(update: Update, context: CallbackContext, *args, **kwargs):
