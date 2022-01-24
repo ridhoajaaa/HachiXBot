@@ -103,6 +103,14 @@ def build_keyboard(buttons):
             keyb.append([InlineKeyboardButton(btn.name, url=btn.url)])
 
     return keyb
+    
+
+def delete(delmsg, timer):
+    sleep(timer)
+    try:
+        delmsg.delete()
+    except:
+        return
 
 
 def revert_buttons(buttons):

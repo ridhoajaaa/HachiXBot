@@ -32,7 +32,9 @@ regex
 bleach
 wikipedia
 markdown2
-telethon==1.24.0
+hurry-filesize
+telethon==1.24.
+pyYAML>=5.1.2
 telegraph
 heroku3
 spamwatch
