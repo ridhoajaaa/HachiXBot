@@ -3,7 +3,7 @@ from pyrogram import filters
 from aiohttp import ClientSession
 from Python_ARQ import ARQ
 
-from telegram.ext import run_async, CommandHandler, MessageHandler, Filters
+from telegram.ext import Filters
 from HachiBot import pbot as app, BOT_ID
 from HachiBot.utils.errors import capture_err
 from HachiBot.utils.permissions import adminsOnly
