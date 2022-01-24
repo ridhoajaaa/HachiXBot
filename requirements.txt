@@ -31,6 +31,7 @@ coffeehouse
 regex
 bleach
 wikipedia
+pythonping
 markdown2
 hurry-filesize
 telethon==1.24.
