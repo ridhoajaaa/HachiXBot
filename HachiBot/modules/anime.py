@@ -506,7 +506,6 @@ def user(update, context):
         caption=caption,
         parse_mode=ParseMode.MARKDOWN,
         reply_markup=InlineKeyboardMarkup(buttons),
-        disable_web_page_preview=True,
     )
     progress_message.delete()
 
