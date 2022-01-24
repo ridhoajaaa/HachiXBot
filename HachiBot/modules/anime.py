@@ -506,7 +506,7 @@ def user(update, context):
         caption=caption,
         parse_mode=ParseMode.MARKDOWN,
         reply_markup=InlineKeyboardMarkup(buttons),
-        disable_web_page_preview=False,
+        disable_web_page_preview=True,
     )
     progress_message.delete()
 
@@ -524,6 +524,186 @@ def upcoming(update: Update, context: CallbackContext):
         upcoming_message += f"{entry_num + 1}. {upcoming_list[entry_num]}\n"
 
     update.effective_message.reply_text(upcoming_message)
+
+
+def watchlist(update, context):
+    update.effective_chat
+    user = update.effective_user
+    message = update.effective_message
+    watchlist = list(REDIS.sunion(f"anime_watch_list{user.id}"))
+    watchlist.sort()
+    watchlist = "\n• ".join(watchlist)
+    if watchlist:
+        message.reply_text(
+            "{}<b>'s Watchlist:</b>"
+            "\n• {}".format(mention_html(user.id, user.first_name), watchlist),
+            parse_mode=ParseMode.HTML,
+        )
+    else:
+        message.reply_text("You havn't added anything in your watchlist!")
+
+
+def removewatchlist(update, context):
+    user = update.effective_user
+    message = update.effective_message
+    removewlist = message.text.split(" ", 1)
+    args = context.args
+    query = " ".join(args)
+    if not query:
+        message.reply_text("Please enter a anime name to remove from your watchlist.")
+        return
+    watchlist = list(REDIS.sunion(f"anime_watch_list{user.id}"))
+    removewlist = removewlist[1]
+
+    if removewlist not in watchlist:
+        message.reply_text(
+            f"<code>{removewlist}</code> doesn't exist in your watch list.",
+            parse_mode=ParseMode.HTML,
+        )
+    else:
+        message.reply_text(
+            f"<code>{removewlist}</code> has been removed from your watch list.",
+            parse_mode=ParseMode.HTML,
+        )
+        REDIS.srem(f"anime_watch_list{user.id}", removewlist)
+
+
+def fvrtchar(update, context):
+    update.effective_chat
+    user = update.effective_user
+    message = update.effective_message
+    fvrt_char = list(REDIS.sunion(f"anime_fvrtchar{user.id}"))
+    fvrt_char.sort()
+    fvrt_char = "\n• ".join(fvrt_char)
+    if fvrt_char:
+        message.reply_text(
+            "{}<b>'s Harem:</b>"
+            "\n• {}".format(mention_html(user.id, user.first_name), fvrt_char),
+            parse_mode=ParseMode.HTML,
+        )
+    else:
+        message.reply_text("You havn't added any waifu in your harem!")
+
+
+def removefvrtchar(update, context):
+    user = update.effective_user
+    message = update.effective_message
+    removewlist = message.text.split(" ", 1)
+    args = context.args
+    query = " ".join(args)
+    if not query:
+        message.reply_text("Please enter a your waifu name to remove from your harem.")
+        return
+    fvrt_char = list(REDIS.sunion(f"anime_fvrtchar{user.id}"))
+    removewlist = removewlist[1]
+
+    if removewlist not in fvrt_char:
+        message.reply_text(
+            f"<code>{removewlist}</code> doesn't exist in your harem",
+            parse_mode=ParseMode.HTML,
+        )
+    else:
+        message.reply_text(
+            f"<code>{removewlist}</code> has been removed from your harem",
+            parse_mode=ParseMode.HTML,
+        )
+        REDIS.srem(f"anime_fvrtchar{user.id}", removewlist)
+
+
+def readmanga(update, context):
+    update.effective_chat
+    user = update.effective_user
+    message = update.effective_message
+    manga_list = list(REDIS.sunion(f"anime_mangaread{user.id}"))
+    manga_list.sort()
+    manga_list = "\n• ".join(manga_list)
+    if manga_list:
+        message.reply_text(
+            "{}<b>'s Manga Lists:</b>"
+            "\n• {}".format(mention_html(user.id, user.first_name), manga_list),
+            parse_mode=ParseMode.HTML,
+        )
+    else:
+        message.reply_text("You havn't added anything in your manga list!")
+
+
+def removemangalist(update, context):
+    user = update.effective_user
+    message = update.effective_message
+    removewlist = message.text.split(" ", 1)
+    args = context.args
+    query = " ".join(args)
+    if not query:
+        message.reply_text("Please enter a manga name to remove from your manga list.")
+        return
+    fvrt_char = list(REDIS.sunion(f"anime_mangaread{user.id}"))
+    removewlist = removewlist[1]
+
+    if removewlist not in fvrt_char:
+        message.reply_text(
+            f"<code>{removewlist}</code> doesn't exist in your manga list.",
+            parse_mode=ParseMode.HTML,
+        )
+    else:
+        message.reply_text(
+            f"<code>{removewlist}</code> has been removed from your favorite characters list.",
+            parse_mode=ParseMode.HTML,
+        )
+        REDIS.srem(f"anime_mangaread{user.id}", removewlist)
+
+
+def animestuffs(update, context):
+    query = update.callback_query
+    user = update.effective_user
+    splitter = query.data.split("=")
+    query_match = splitter[0]
+    callback_anime_data = splitter[1]
+    if query_match == "xanime_watchlist":
+        watchlist = list(REDIS.sunion(f"anime_watch_list{user.id}"))
+        if not callback_anime_data in watchlist:
+            REDIS.sadd(f"anime_watch_list{user.id}", callback_anime_data)
+            context.bot.answer_callback_query(
+                query.id,
+                text=f"{callback_anime_data} is successfully added to your watch list.",
+                show_alert=True,
+            )
+        else:
+            context.bot.answer_callback_query(
+                query.id,
+                text=f"{callback_anime_data} is already exists in your watch list!",
+                show_alert=True,
+            )
+
+    elif query_match == "xanime_fvrtchar":
+        fvrt_char = list(REDIS.sunion(f"anime_fvrtchar{user.id}"))
+        if not callback_anime_data in fvrt_char:
+            REDIS.sadd(f"anime_fvrtchar{user.id}", callback_anime_data)
+            context.bot.answer_callback_query(
+                query.id,
+                text=f"{callback_anime_data} is successfully added to your favorite character.",
+                show_alert=True,
+            )
+        else:
+            context.bot.answer_callback_query(
+                query.id,
+                text=f"{callback_anime_data} is already exists in your favorite characters list!",
+                show_alert=True,
+            )
+    elif query_match == "xanime_manga":
+        fvrt_char = list(REDIS.sunion(f"anime_mangaread{user.id}"))
+        if not callback_anime_data in fvrt_char:
+            REDIS.sadd(f"anime_mangaread{user.id}", callback_anime_data)
+            context.bot.answer_callback_query(
+                query.id,
+                text=f"{callback_anime_data} is successfully added to your favorite character.",
+                show_alert=True,
+            )
+        else:
+            context.bot.answer_callback_query(
+                query.id,
+                text=f"{callback_anime_data} is already exists in your favorite characters list!",
+                show_alert=True,
+            )
 
 
 def button(update: Update, context: CallbackContext):
