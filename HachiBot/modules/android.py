@@ -225,7 +225,7 @@ def orangefox(update, _):
             version = page["version"]
             changelog = page["changelog"][0]
             size = str(round(float(page["size"]) / 1024 / 1024, 1)) + "MB"
-            dl_link = page["mirrors"]["DL"]
+            dl_link = page["mirrors"]["US"]
             date = datetime.fromtimestamp(page["date"])
             md5 = page["md5"]
             msg = f"*Latest OrangeFox Recovery for the {full_name}*\n\n"
