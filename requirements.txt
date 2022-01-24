@@ -62,7 +62,7 @@ html2text
 bs4
 redis
 hiredis==2.0.0
-aioredis==2.0.0
+aioredis==2.0.1
 pySmartDL
 bing_image_downloader
 search_engine_parser
