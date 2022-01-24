@@ -23,7 +23,6 @@ OFFICERS = [OWNER_ID] + DEV_USERS + DRAGONS + DEMONS + TIGERS
 ERROR_DUMP = None
 
 
-@run_async
 def gmute(update, context):
     message = update.effective_message  # type: Optional[Message]
     chat = update.effective_chat
@@ -137,7 +136,6 @@ def gmute(update, context):
     message.reply_text("They won't be talking again anytime soon.")
 
 
-@run_async
 def ungmute(update, context):
     message = update.effective_message  # type: Optional[Message]
     bot = context.bot
@@ -222,7 +220,6 @@ def ungmute(update, context):
     message.reply_text("Person has been un-gmuted.")
 
 
-@run_async
 def gmutelist(update, context):
     muted_users = sql.get_gmute_list()
 
@@ -258,7 +255,6 @@ def check_and_mute(update, user_id, should_message=True):
             )
 
 
-@run_async
 def enforce_gmute(update, context):
     # Not using @restrict handler to avoid spamming - just ignore if cant gmute.
     if (
@@ -281,7 +277,6 @@ def enforce_gmute(update, context):
                 check_and_mute(update, user.id, should_message=True)
 
 
-@run_async
 @user_admin
 def gmutestat(update, context):
     args = context.args
@@ -335,22 +330,22 @@ GMUTE_HANDLER = CommandHandler(
     "gmute",
     gmute,
     pass_args=True,
-    filters=CustomFilters.sudo_filter | CustomFilters.support_filter,
+    filters=CustomFilters.sudo_filter | CustomFilters.support_filter, run_async=True
 )
 UNGMUTE_HANDLER = CommandHandler(
     "ungmute",
     ungmute,
     pass_args=True,
-    filters=CustomFilters.sudo_filter | CustomFilters.support_filter,
+    filters=CustomFilters.sudo_filter | CustomFilters.support_filter, run_async=True
 )
 GMUTE_LIST = CommandHandler(
     "gmutelist",
     gmutelist,
-    filters=CustomFilters.sudo_filter | CustomFilters.support_filter,
+    filters=CustomFilters.sudo_filter | CustomFilters.support_filter, run_async=True
 )
 
 GMUTE_STATUS = CommandHandler(
-    "gmutespam", gmutestat, pass_args=True, filters=Filters.chat_type.groups
+    "gmutespam", gmutestat, pass_args=True, filters=Filters.chat_type.groups, run_async=True
 )
 
 GMUTE_ENFORCER = MessageHandler(Filters.all & Filters.chat_type.groups, enforce_gmute)
