@@ -289,6 +289,7 @@ pbot = Client(
     workers=min(32, os.cpu_count() + 4),
 )
 apps = []
+apps = [pgram]
 apps.append(pbot)
 loop = asyncio.get_event_loop()
 ubot = TelegramClient(StringSession(STRING_SESSION), API_ID, API_HASH)
