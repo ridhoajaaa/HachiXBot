@@ -353,7 +353,7 @@ GMUTE_STATUS = CommandHandler(
     "gmutespam", gmutestat, pass_args=True, filters=Filters.chat_type.groups
 )
 
-GMUTE_ENFORCER = MessageHandler(filters=Filters.chat_type.groups, enforce_gmute)
+GMUTE_ENFORCER = MessageHandler(Filters.all & Filters.chat_type.groups, enforce_gmute)
 
 dispatcher.add_handler(GMUTE_HANDLER)
 dispatcher.add_handler(UNGMUTE_HANDLER)
