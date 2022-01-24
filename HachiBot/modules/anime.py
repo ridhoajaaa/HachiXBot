@@ -11,12 +11,20 @@ from telegram import (InlineKeyboardButton, InlineKeyboardMarkup, ParseMode,
                       Update)
 from telegram.ext import CallbackContext, CallbackQueryHandler
 
+from HachiBot import DEV_USERS, OWNER_ID, DRAGONS, REDIS, dispatcher, pgram
+from HachiBot.modules.helper_funcs.alternate import typing_action
+from HachiBot.modules.helper_funcs.chat_status import callbacks_in_filters
+
 info_btn = "More Information"
 kaizoku_btn = "Kaizoku ☠️"
 kayo_btn = "Kayo 🏴‍☠️"
 prequel_btn = "⬅️ Prequel"
 sequel_btn = "Sequel ➡️"
 close_btn = "Close ❌"
+
+ANIME_IMG = "https://telegra.ph/file/56b16e6599af473d692f9.gif"
+MANGA_IMG = "https://telegra.ph/file/e6b1c11a9cd09a9c0e223.gif"
+CHARACTER_IMG = "https://telegra.ph/file/a355b31aa5dfe112605d2.gif"
 
 
 def shorten(description, info='anilist.co'):
@@ -188,106 +196,150 @@ def airing(update: Update, context: CallbackContext):
         reply_markup=InlineKeyboardMarkup(buttons)
     )
 
-def anime(update: Update, context: CallbackContext):
+@typing_action
+def anime(update, context):
     message = update.effective_message
-    search = message.text.split(' ', 1)
+    search = message.text.split(" ", 1)
     if len(search) == 1:
-        update.effective_message.reply_text('Format : /anime < anime name >')
+        update.effective_message.reply_animation(
+            ANIME_IMG,
+            caption="""Format : /anime < anime name >""",
+            parse_mode="markdown",
+        )
         return
-    else:
-        search = search[1]
-    variables = {'search': search}
+    search = search[1]
+    variables = {"search": search}
     json = requests.post(
-        url, json={
-            'query': anime_query,
-            'variables': variables
-        }).json()
-    if 'errors' in json.keys():
-        update.effective_message.reply_text('Anime not found')
+        url, json={"query": anime_query, "variables": variables}
+    ).json()
+    if "errors" in json.keys():
+        update.effective_message.reply_text("Anime not found ;-;")
         return
     if json:
-        json = json['data']['Media']
-        msg = f"*{json['title']['romaji']}*(`{json['title']['native']}`)\n*Type*: {json['format']}\n*Status*: {json['status']}\n*Episodes*: {json.get('episodes', 'N/A')}\n*Duration*: {json.get('duration', 'N/A')} Per Ep.\n*Score*: {json['averageScore']}\n*Genres*: `"
-        for x in json['genres']:
+        json = json["data"]["Media"]
+        msg = f"*{json['title']['romaji']}* *-* *({json['title']['native']})*\n\n*• Type*: {json['format']}\n*• Status*: {json['status']}\n*• Episodes*: {json.get('episodes', 'N/A')}\n*• Duration*: {json.get('duration', 'N/A')} Per Ep.\n*• Score*: {json['averageScore']}\n*• Genres*: `"
+        for x in json["genres"]:
             msg += f"{x}, "
-        msg = msg[:-2] + '`\n'
-        msg += "*Studios*: `"
-        for x in json['studios']['nodes']:
+        msg = msg[:-2] + "`\n"
+        msg += "*• Studios*: `"
+        for x in json["studios"]["nodes"]:
             msg += f"{x['name']}, "
-        msg = msg[:-2] + '`\n'
-        info = json.get('siteUrl')
-        trailer = json.get('trailer', None)
-        anime_id = json['id']
+        msg = msg[:-2] + "`\n"
+        anime_name_w = f"{json['title']['romaji']}"
+        info = json.get("siteUrl")
+        trailer = json.get("trailer", None)
+        json["id"]
         if trailer:
-            trailer_id = trailer.get('id', None)
-            site = trailer.get('site', None)
+            trailer_id = trailer.get("id", None)
+            site = trailer.get("site", None)
             if site == "youtube":
-                trailer = 'https://youtu.be/' + trailer_id
-        description = json.get('description', 'N/A').replace('<i>', '').replace(
-            '</i>', '').replace('<br>', '')
+                trailer = "https://youtu.be/" + trailer_id
+        description = (
+            json.get("description", "N/A")
+            .replace("<b>", "")
+            .replace("</b>", "")
+            .replace("<br>", "")
+        )
         msg += shorten(description, info)
-        image = json.get('bannerImage', None)
+        image = info.replace("anilist.co/anime/", "img.anili.st/media/")
         if trailer:
-            buttons = [[
-                InlineKeyboardButton("More Info", url=info),
-                InlineKeyboardButton("Trailer 🎬", url=trailer)
-            ]]
+            buttons = [
+                [
+                    InlineKeyboardButton("More Info ➕", url=info),
+                    InlineKeyboardButton("Trailer 🎬", url=trailer),
+                ]
+            ]
+            buttons += [
+                [
+                    InlineKeyboardButton(
+                        "➕ Add To Watchlist ➕",
+                        callback_data=f"xanime_watchlist={anime_name_w}",
+                    )
+                ]
+            ]
         else:
             buttons = [[InlineKeyboardButton("More Info", url=info)]]
+            buttons += [
+                [
+                    InlineKeyboardButton(
+                        "➕ Add To Watchlist",
+                        callback_data=f"xanime_watchlist={anime_name_w}",
+                    )
+                ]
+            ]
         if image:
             try:
                 update.effective_message.reply_photo(
                     photo=image,
                     caption=msg,
                     parse_mode=ParseMode.MARKDOWN,
-                    reply_markup=InlineKeyboardMarkup(buttons))
+                    reply_markup=InlineKeyboardMarkup(buttons),
+                )
             except:
                 msg += f" [〽️]({image})"
                 update.effective_message.reply_text(
                     msg,
                     parse_mode=ParseMode.MARKDOWN,
-                    reply_markup=InlineKeyboardMarkup(buttons))
+                    reply_markup=InlineKeyboardMarkup(buttons),
+                )
         else:
             update.effective_message.reply_text(
                 msg,
                 parse_mode=ParseMode.MARKDOWN,
-                reply_markup=InlineKeyboardMarkup(buttons))
+                reply_markup=InlineKeyboardMarkup(buttons),
+            )
 
 
-def character(update: Update, context: CallbackContext):
+@typing_action
+def character(update, context):
     message = update.effective_message
-    search = message.text.split(' ', 1)
+    search = message.text.split(" ", 1)
     if len(search) == 1:
-        update.effective_message.reply_text(
-            'Format : /character < character name >')
+        update.effective_message.reply_animation(
+            CHARACTER_IMG,
+            caption="""Format : /character < character name >""",
+            parse_mode="markdown",
+        )
         return
     search = search[1]
-    variables = {'query': search}
+    variables = {"query": search}
     json = requests.post(
-        url, json={
-            'query': character_query,
-            'variables': variables
-        }).json()
-    if 'errors' in json.keys():
-        update.effective_message.reply_text('Character not found')
+        url, json={"query": character_query, "variables": variables}
+    ).json()
+    if "errors" in json.keys():
+        update.effective_message.reply_text("Character not found")
         return
     if json:
-        json = json['data']['Character']
-        msg = f"*{json.get('name').get('full')}*(`{json.get('name').get('native')}`)\n"
+        json = json["data"]["Character"]
+        msg = (
+            f"* {json.get('name').get('full')}*(`{json.get('name').get('native')}`) \n"
+        )
         description = f"{json['description']}"
-        site_url = json.get('siteUrl')
+        site_url = json.get("siteUrl")
+        char_name = f"{json.get('name').get('full')}"
         msg += shorten(description, site_url)
-        image = json.get('image', None)
+        image = json.get("image", None)
         if image:
-            image = image.get('large')
+            image = image.get("large")
+            buttons = [
+                [
+                    InlineKeyboardButton(
+                        "Save as Waifu ❣️", callback_data=f"xanime_fvrtchar={char_name}"
+                    )
+                ]
+            ]
             update.effective_message.reply_photo(
                 photo=image,
-                caption=msg.replace('<b>', '</b>'),
-                parse_mode=ParseMode.MARKDOWN)
+                caption=msg.replace("<b>", "</b>"),
+                reply_markup=InlineKeyboardMarkup(buttons),
+                parse_mode=ParseMode.MARKDOWN,
+            )
         else:
             update.effective_message.reply_text(
-                msg.replace('<b>', '</b>'), parse_mode=ParseMode.MARKDOWN)
-
+                msg.replace("<b>", "</b>"),
+                reply_markup=InlineKeyboardMarkup(buttons),
+                parse_mode=ParseMode.MARKDOWN,
+            )
 
 def manga(update: Update, context: CallbackContext):
     message = update.effective_message
@@ -552,21 +604,39 @@ def kayo(update: Update, context: CallbackContext):
 
 
 __help__ = """
- ──「 Anime search 」──                           
-❂ /anime <anime>: returns information about the anime.
-❂ /whatanime: returns source of anime when replied to photo or gif.                                                          
-❂ /character <character>: returns information about the character.
-❂ /manga <manga>: returns information about the manga.
-❂ /user <user>: returns information about a MyAnimeList user.
-❂ /upcoming: returns a list of new anime in the upcoming seasons.
-❂ /airing <anime>: returns anime airing info.
-❂ /whatanime <anime>: reply to gif or photo.
-❂ /kaizoku <anime>: search an anime on animekaizoku.com
-❂ /kayo <anime>: search an anime on animekayo.com
+Get information about anime, manga or characters from [AniList](anilist.co)
+*AniList Commands:*
+× `/anime <anime>`*:* returns information about the anime from AniList.
+× `/character <character>`*:* returns information about the character from AniList.
+× `/manga <manga>`*:* returns information about the manga from AniList.
+× `/upcoming`*:* returns a list of new anime in the upcoming seasons from AniList.
+× `/airing <anime>`*:* returns anime airing info from AniList.
 
- 「 Anime Quotes 」
-❂ /animequotes: for anime quotes randomly as photos.
-❂ /quote: send quotes randomly as text
+Get information about anime, manga or characters from [MAL](https://myanimelist.net/)
+*My Anime list Commands:*
+× `/manime <anime>`*:* returns information about the anime MAL.
+× `/mcharacter` <character>*:* returns information about the character from MAL.
+× `/mmanga <manga>`*:* returns information about the manga from MAL.
+× `/mupcoming`*:* returns a list of new anime in the upcoming seasons from MAL.
+× `/user <user>`*:* returns information about a MyAnimeList user.
+× `/animequotes`*:* sends random anime quotes.
+× `/quote`*:* send random quotes
+
+*Anime Search Commands:*
+× `/kayo`*:* search an Anime on AnimeKayo website.
+× `/kaizoku`*:* search an Anime on AnimeKaizoku website.
+× `/whatanime`*:* Please reply to a Gif or Photo or Video, then bot gives information about the anime.
+
+*Anime Search Commands:*
+× `/meme`*:* sends Anime Memes.
+× `/hmeme`*:* sends Hentai Memes.
+× `/rmeme`*:* sends Reddit Memes.
+
+*Anime Search Commands:*
+× `/watchorder <anime>`*:* send watch Order of anime.
+
+You saw a good anime video, photo, gif but dont know what is that anime's name?
+This is where whatanime comes in, just reply to that media with `/whatanime` and it will search the anime name for you from anilist.
  """
 
 ANIME_HANDLER = DisableAbleCommandHandler("anime", anime, run_async=True)
