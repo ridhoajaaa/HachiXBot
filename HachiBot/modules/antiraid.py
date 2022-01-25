@@ -11,7 +11,7 @@ from telegram.utils.helpers import mention_html
 
 from HachiBot import LOGGER as log
 from HachiBot.modules.log_channel import loggable
-from HachiBot.mdoules.helper_funcs.anonymous import user_admin as u_admin, AdminPerms, resolve_user as res_user
+from HachiBot.modules.helper_funcs.anonymous import user_admin as u_admin, AdminPerms, resolve_user as res_user
 from HachiBot.modules.helper_funcs.chat_status import connection_status, user_admin_no_reply
 from HachiBot.modules.helper_funcs.decorators import ddocmd, ddocallback
 from HachiBot.modules.cron_jobs import j
