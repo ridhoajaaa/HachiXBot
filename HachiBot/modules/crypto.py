@@ -1,7 +1,7 @@
 from pyrogram import filters
 
 from HachiBot import pbot
-from HachiBot.bot_plugins.errors import capture_err
+from HachiBot.ex_plugins.errors import capture_err
 from HachiBot.services.keyboard import ikb
 from HachiBot.core.sections import section
 from HachiBot.utils.http import get

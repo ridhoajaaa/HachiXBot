@@ -13,16 +13,16 @@ async def _(event):
            return
     kontol = await event.reply("`Processing tiny...`")
     ik = await tbot.download_media(reply)
-    im1 = Image.open("HachiBot/resources/Prime.png")
+    im1 = Image.open("HachiBot/resources/hachi.png")
     if ik.endswith(".tgs"):
-        await tbot.download_media(reply, "Prime.tgs")
-        os.system("lottie_convert.py Prime.tgs json.json")
+        await tbot.download_media(reply, "hachi.tgs")
+        os.system("lottie_convert.py hachi.tgs json.json")
         json = open("json.json", "r")
         jsn = json.read()
         jsn = jsn.replace("512", "2000")
         open = ("json.json", "w").write(jsn)
-        os.system("lottie_convert.py json.json Prime.tgs")
-        file = "Prime.tgs"
+        os.system("lottie_convert.py json.json hachi.tgs")
+        file = "hachi.tgs"
         os.remove("json.json")
     elif ik.endswith((".gif", ".mp4")):
         iik = cv2.VideoCapture(ik)

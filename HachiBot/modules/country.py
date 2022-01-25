@@ -100,7 +100,7 @@ Sub Region:- {sub}
 Time Zones:- {tom}
 Top Level Domain:- {lanester}
 wikipedia:- {wiki}</b>
-Gathered By Prime Mega ✨.</b>
+Gathered By  HachiXBot ✨.</b>
 """
 
     await borg.send_message(

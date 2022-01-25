@@ -9,7 +9,7 @@ from HachiBot import OWNER_ID, DEV_USERS
 from HachiBot import TEMP_DOWNLOAD_DIRECTORY as path
 from HachiBot import TEMP_DOWNLOAD_DIRECTORY
 from datetime import datetime
-water = './HachiBot/resources/Prime.png'
+water = './HachiBot/resources/hachi.png'
 client = tbot
 
 @register(pattern=r"^/send ?(.*)")
