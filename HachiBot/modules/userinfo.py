@@ -502,8 +502,8 @@ def stats(update, context):
             status
             + "\n*Bot statistics*:\n"
             + "\n".join([mod.__stats__() for mod in STATS])
-            + "\n\n[⍙ GitHub](https://github.com/aryazakaria01/HachiBot-Nagisa) | [⍚ Bokep](https://xnxx.com)\n\n"
-            + "╘══「 by [Dynamic](github.com/aryazakaria01) 」\n",
+            + "\n\n[⍙ GitHub](https://github.com/ridhoajaaa/HachiXBot) | [⍚ Bokep](https://xnxx.com)\n\n"
+            + "╘══「 by [ddodxy](github.com/ridhoajaaa) 」\n",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(kb),
             disable_web_page_preview=True,
