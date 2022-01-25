@@ -207,7 +207,8 @@ __help__ = """
  ❍ `/apod`*:* Get Astronomy Picture of Day by NASA.
  ❍ `/devian` <search query> ; <no of pics> *:* Devian-Art Image Search.
  ❍ `/joke`*:* To get random joke.
- ❍ `/inslut`*:* Insult someone..
+ ❍ `/inslut`*:* Insult someone.
+ ❍ `/bugil`*:*nbuat yang sangean kek mas almin.
  ❍ `/url <long url>`*:* To get a shorten link of long link.
  ❍ `/carbon` <text> [or reply] *:* Beautify your code using carbon.now.sh
  ❍ `/phone <number>`*:* To get info about that number
