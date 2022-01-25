@@ -4,18 +4,22 @@ from typing import List
 import requests
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import CallbackContext, run_async
 from telegram import ParseMode, Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import CallbackContext
 
 from HachiBot import StartTime, dispatcher
-from HachiBot.modules.helper_funcs.chat_status import sudo_plus
+from HachiBot import pgram
 from HachiBot.modules.disable import DisableAbleCommandHandler
+from HachiBot.modules.helper_funcs.chat_status import sudo_plus
+from HachiBot.modules.stats import bot_sys_stats as hachi
 
 sites_list = {
     "Telegram": "https://api.telegram.org",
     "Kaizoku": "https://animekaizoku.com",
     "Kayo": "https://animekayo.com",
     "Jikan": "https://api.jikan.moe/v3",
+    "Kuki Chatbot": "https://kuki-yukicloud.up.railway.app/",
+    "liones API": "https://liones-api.herokuapp.com/",
 }
 
 
@@ -27,10 +31,7 @@ def get_readable_time(seconds: int) -> str:
 
     while count < 4:
         count += 1
-        if count < 3:
-            remainder, result = divmod(seconds, 60)
-        else:
-            remainder, result = divmod(seconds, 24)
+        remainder, result = divmod(seconds, 60) if count < 3 else divmod(seconds, 24)
         if seconds == 0 and remainder == 0:
             break
         time_list.append(int(result))
@@ -60,7 +61,7 @@ def ping_func(to_ping: List[str]) -> List[str]:
 
         pinged_site = f"<b>{each_ping}</b>"
 
-        if each_ping == "Kaizoku" or each_ping == "Kayo":
+        if each_ping in ("Kaizoku", "Kayo"):
             pinged_site = f'<a href="{sites_list[each_ping]}">{each_ping}</a>'
             ping_time = f"<code>{ping_time} (Status: {r.status_code})</code>"
 
@@ -81,29 +82,44 @@ def ping(update: Update, context: CallbackContext):
     uptime = get_readable_time((time.time() - StartTime))
 
     message.edit_text(
-        "<b>PONG</b>!! ✨\n"
+        "PONG!!\n"
         "<b>Time Taken:</b> <code>{}</code>\n"
         "<b>Service uptime:</b> <code>{}</code>".format(telegram_ping, uptime),
         parse_mode=ParseMode.HTML,
         reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("⚡ LORD ⚡", url="https://t.me/ddodxy")]]
+            [
+                [
+                    InlineKeyboardButton(
+                        text="System Stats", callback_data="stats_callback"
+                        ),
+                    ([InlineKeyboardButton("⚡ LORD ⚡", url="https://t.me/ddodxy")])
+                ]
+            ]
         ),
     )
 
 
+@pgram.on_callback_query(filters.regex("stats_callback"))
+async def stats_callbacc(_, CallbackQuery):
+    text = await hachi()
+    await HachiBot.answer_callback_query(CallbackQuery.id, text, show_alert=True)
+
+
 @sudo_plus
 def pingall(update: Update, context: CallbackContext):
-    to_ping = ["Kaizoku", "Kayo", "Telegram", "Jikan"]
+    to_ping = ["Kaizoku", "Kayo", "Telegram", "Jikan", "Kuki Chatbot", "liones API"]
     pinged_list = ping_func(to_ping)
     pinged_list.insert(2, "")
     uptime = get_readable_time((time.time() - StartTime))
 
-    reply_msg = "⏱Ping results are:\n"
+    reply_msg = "⏱ Ping results are:\n"
     reply_msg += "\n".join(pinged_list)
     reply_msg += "\n<b>Service uptime:</b> <code>{}</code>".format(uptime)
 
     update.effective_message.reply_text(
-        reply_msg, parse_mode=ParseMode.HTML, disable_web_page_preview=True
+        reply_msg,
+        parse_mode=ParseMode.HTML,
+        disable_web_page_preview=True,
     )
 
 
