@@ -90,10 +90,10 @@ def ping(update: Update, context: CallbackContext):
             [
                 [
                     InlineKeyboardButton(
-                        text="System Stats", callback_data="stats_callback"
+                        text="⚡ Systats ⚡", callback_data="stats_callback"
                         ),
                     InlineKeyboardButton(
-                        text="⚡ LORD ⚡", url="https://t.me/ddodxy"
+                        text="⚡ Ongner ⚡", url="https://t.me/ddodxy"
                     )
                 ]
             ]
@@ -104,7 +104,7 @@ def ping(update: Update, context: CallbackContext):
 @pgram.on_callback_query(filters.regex("stats_callback"))
 async def stats_callbacc(_, CallbackQuery):
     text = await hachi()
-    await HachiBot.answer_callback_query(CallbackQuery.id, text, show_alert=True)
+    await hachi.answer_callback_query(CallbackQuery.id, text, show_alert=True)
 
 
 @sudo_plus
