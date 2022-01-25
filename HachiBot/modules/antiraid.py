@@ -1,4 +1,4 @@
-MODUL FROM https://github.com/aryazakaria01/Natsunagi-Nagisa
+# MODUL FROM https://github.com/aryazakaria01/Natsunagi-Nagisa
 
 import html
 from typing import Optional
