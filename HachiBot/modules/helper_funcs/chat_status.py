@@ -43,6 +43,7 @@ def user_can_pin(chat: Chat, user: User, bot_id: int) -> bool:
 
 def is_user_admin(update: Update, user_id: int, member: ChatMember = None) -> bool:
     chat = update.effective_chat
+    user = update.effective_user
     msg = update.effective_message
     if (
         chat.type == "private"
