@@ -24,19 +24,19 @@ Originally a marie fork - HachiXBot has evolved further and was built to be more
 
 Hachi Goemon is a Characther powerful in anime and modular telegram group management bot built using python3 and sqlalchemy. Literally she can do anything to help you make your group a better place like any other bot and she's painted with anime theme for weeb lover's.
 
-### Deploy To Heroku 📡</h4>
+### Deploy To Heroku 
 
 <p align="center"><a href="https://heroku.com/deploy?template=https://github.com/ridhoajaaa/HachiXBot"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="220" height="34.45"/></a></p>
 
 ## Bot stuff
 
-* Bot link : [Hachi Goemob](https://t.me/HachiXBot)
+* Bot link : [Hachi Goemon](https://t.me/HachiXBot)
 * Bot Support chat : [Support](https://t.me/demonszxx)
 * Bot News/Updates : [News](https://t.me/HachiXLogs)
 
 ## CREDITS
 
-This whole repo was forked and edited from [SaitamaRobot](https://github.com/AnimeKaizoku/SaitamaRobot), And base from [Prime Mega](https://github.com/Tonic990/PrimeMega).
+This whole repo was forked and edited from [Prime Mega](https://github.com/Tonic990/PrimeMega), And multiple modules from [NatsuNagisa](https://github.com/ridhoajaaa/Natsunagi-Nagisa).
 Appropriate copyright and Code ownership goes to the respective creators/developers/owners.
 Some code has been created by my own and my team.
 I thank everyone who is behind this huge project. 
