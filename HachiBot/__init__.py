@@ -119,6 +119,7 @@ if ENV:
     TIME_API_KEY = os.environ.get("TIME_API_KEY", None)
     WALL_API = os.environ.get("WALL_API", None)
     REDIS_URL = os.environ.get("REDIS_URL", None)
+    MONGO_PORT = os.environ.get("MONGO_PORT")
     SUPPORT_CHAT = os.environ.get("SUPPORT_CHAT", None)
     SPAMWATCH_SUPPORT_CHAT = os.environ.get("SPAMWATCH_SUPPORT_CHAT", None)
     SPAMWATCH_API = os.environ.get("SPAMWATCH_API", None)
@@ -202,6 +203,7 @@ else:
     TIME_API_KEY = Config.TIME_API_KEY
     WALL_API = Config.WALL_API
     REDIS_URL = Config.REDIS_URL
+    MONGO_PORT = Config.MONGO_PORT
     SUPPORT_CHAT = Config.SUPPORT_CHAT
     SPAMWATCH_SUPPORT_CHAT = Config.SPAMWATCH_SUPPORT_CHAT
     SPAMWATCH_API = Config.SPAMWATCH_API
