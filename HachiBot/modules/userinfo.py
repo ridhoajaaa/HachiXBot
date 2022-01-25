@@ -34,6 +34,7 @@ from HachiBot import (
     TIGERS,
     WOLVES,
     StartTime,
+    SYL
     dispatcher,
     sw,
 )
@@ -300,11 +301,11 @@ def info(update: Update, context: CallbackContext):
         text += f"\n\n<b>Health:</b> <code>{userhp['earnedhp']}/{userhp['totalhp']}</code>\n[<i>{make_bar(int(userhp['percentage']))} </i>{userhp['percentage']}%]"
 
     try:
-        spamwtc = sw.get_ban(int(user.id))
-        if spamwtc:
-            text += "\n\n<b>This person is Spamwatched!</b>"
-            text += f"\nReason: <pre>{spamwtc.reason}</pre>"
-            text += "\nAppeal at @SpamWatchSupport"
+        x = SYL.check(int(user.id))
+        if x:
+            text += "\n\n<b>This person is Blacklist</b>"
+            text += f"\nReason: <pre>{x.reason}</pre>"
+            text += "\nAppeal at @Sylviorus_support"
     except:
         pass  # don't crash if api is down somehow...
 
