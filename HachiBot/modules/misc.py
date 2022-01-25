@@ -96,7 +96,7 @@ def markdown_help_sender(update: Update):
 @typing_action
 def src(update, _):
     update.effective_message.reply_text(
-        "Hey there! You can find what makes me click [here](https://github.com/aryazakaria01/HachiBot-Nagisa).",
+        "Hey there! You can find what makes me click [here](https://github.com/ridhoajaaa/HachiXBot).",
         parse_mode=ParseMode.MARKDOWN,
         disable_web_page_preview=True,
     )

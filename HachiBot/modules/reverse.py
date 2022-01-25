@@ -1,24 +1,25 @@
 import os
 import re
-import requests
 import urllib
-import urllib.request
 import urllib.parse
-from urllib.error import URLError, HTTPError
-from bs4 import BeautifulSoup
+import urllib.request
+from urllib.error import HTTPError, URLError
 
-from telegram import InputMediaPhoto, TelegramError
-from telegram import Update
-from telegram.ext import CallbackContext, run_async
+import requests
+from bs4 import BeautifulSoup
+from telegram import InputMediaPhoto, TelegramError, Update
+from telegram.ext import CallbackContext
 
 from HachiBot import dispatcher
 from HachiBot.modules.disable import DisableAbleCommandHandler
+from HachiBot.modules.helper_funcs.decorators import ddocmd
 
 opener = urllib.request.build_opener()
 useragent = "Mozilla/5.0 (Linux; Android 6.0.1; SM-G920V Build/MMB29K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.98 Mobile Safari/537.36"
 opener.addheaders = [("User-agent", useragent)]
 
 
+@ddocmd(command=["grs", "reverse"])
 def reverse(update: Update, context: CallbackContext):
     if os.path.isfile("okgoogle.png"):
         os.remove("okgoogle.png")
@@ -50,7 +51,7 @@ def reverse(update: Update, context: CallbackContext):
                 lim = 2
         else:
             lim = 2
-    elif args and not reply:
+    elif args:
         splatargs = msg.text.split(" ")
         if len(splatargs) == 3:
             img_link = splatargs[1]
@@ -156,7 +157,6 @@ def reverse(update: Update, context: CallbackContext):
 
 def ParseSauce(googleurl):
     """Parse/Scrape the HTML code for the info we want."""
-
     source = opener.open(googleurl).read()
     soup = BeautifulSoup(source, "html.parser")
 
@@ -183,7 +183,6 @@ def ParseSauce(googleurl):
 
 def scam(imgspage, lim):
     """Parse/Scrape the HTML code for the info we want."""
-
     single = opener.open(imgspage).read()
     decoded = single.decode("utf-8")
     if int(lim) > 10:
@@ -202,10 +201,3 @@ def scam(imgspage, lim):
             break
 
     return imglinks
-
-
-REVERSE_HANDLER = DisableAbleCommandHandler(
-    "reverse", reverse, pass_args=True, admin_ok=True, run_async=True
-)
-
-dispatcher.add_handler(REVERSE_HANDLER)
