@@ -155,16 +155,6 @@ def check_afk(update, _, user_id: int, fst_name: int, userc_id: int):
 
 def __gdpr__(user_id):
     end_afk(user_id)
-
-
-__help__ = """
-When marked as AFK, any mentions will be replied to with a message to say you're not available!
-
-❂ /afk <reason>: Mark yourself as AFK.
-❂ brb <reason>: Same as the afk command - but not a command.
-
-An example of how to afk or brb:
-`/afk dinner` or brb dinner.
-"""
+    
 
 __mod_name__ = "AFK"

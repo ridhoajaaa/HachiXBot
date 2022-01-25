@@ -368,7 +368,7 @@ def info(update: Update, context: CallbackContext):
                             InlineKeyboardButton(
                                 "Health", url="https://t.me/@HachiXLogs/116"),
                             InlineKeyboardButton(
-                                "Disaster", url="https://t.me/@HachiXLogs/114")
+                                "Disaster", url="https://t.me/HachiXLogs/114")
                         ],
                     ]
                 ),
@@ -386,7 +386,7 @@ def info(update: Update, context: CallbackContext):
                             InlineKeyboardButton(
                                 "Health", url="https://t.me/HachiXLogs/116"),
                             InlineKeyboardButton(
-                                "Disaster", url="https://t.me/@HachiXLogs/114")
+                                "Disaster", url="https://t.me/HachiXLogs/114")
                         ],
                     ]
                 ),
@@ -577,11 +577,12 @@ Examples:
  
 *AFk:*
 When marked as AFK, any mentions will be replied to with a message stating that you're not available!
-❂ /afk <reason>*:* Mark yourself as AFK.
-  - brb <reason>: Same as the afk command, but not a command. 
+❂ /afk or brb <reason>*:* Mark yourself as AFK.
+ An example of how to afk or brb:
+ `/afk ngocok` or brb ngocok.
   
 *What is that health thingy?*
- Come and see [HP System explained](https://t.me/KennedyProject/44)
+ Come and see [HP System explained](https://t.me/HachiXLogs/116)
 """
 
 SET_BIO_HANDLER = DisableAbleCommandHandler("setbio", set_about_bio, run_async=True)
