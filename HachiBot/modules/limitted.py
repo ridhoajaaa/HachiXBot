@@ -10,8 +10,8 @@
 
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from aries.events import register
-from aries import ubot
+from HachiBot.events import register
+from HachiBot import ubot
 
 
 @register(pattern="^/limited ?(.*)")
