@@ -280,8 +280,6 @@ pgram = Client(
     bot_token=TOKEN,
 )
 
-app = Client("hachi", token=TOKEN, api_id=API_ID, api_hash=API_HASH)
-
 ubot2 = TelegramClient(StringSession(STRING_SESSION), API_ID, API_HASH)
 try:
     ubot2.start()
