@@ -5,6 +5,7 @@ import sys
 import json
 import asyncio
 import time
+from HachiBot.utils import Sylviorus
 import spamwatch
 import telegram.ext as tg
 
@@ -249,6 +250,8 @@ finally:
     REDIS.ping()
 
     LOGGER.info("[REDIS]: Connection To Redis Database Successfully!")
+
+SYL = Sylviorus()
 
 
 if not SPAMWATCH_API:
