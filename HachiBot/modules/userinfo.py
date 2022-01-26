@@ -34,7 +34,7 @@ from HachiBot import (
     TIGERS,
     WOLVES,
     StartTime,
-    SYL
+    SYL,
     sw,
 )
 from HachiBot import telethn as HachiBot, pgram
