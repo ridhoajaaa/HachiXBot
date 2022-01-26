@@ -1,3 +1,5 @@
+# Modules From Prime Mega (https://github.com/Tonic990/PrimeMega/blob/Master/PrimeMega/modules/logomaker.py)
+
 import os
 import random
 import glob
@@ -63,7 +65,7 @@ async def logo_gen(event):
     else:
         pics = []
         async for i in ubot2.iter_messages(
-            "@HachiLogoPack", filter=InputMessagesFilterPhotos
+            "@PrimeLogoPack", filter=InputMessagesFilterPhotos
         ):
             pics.append(i)
         id_ = random.choice(pics)
@@ -73,7 +75,7 @@ async def logo_gen(event):
     if not bg_:
         pics = []
         async for i in ubot2.iter_messages(
-            "@HachiLogopack", filter=InputMessagesFilterPhotos
+            "@PrimeLogopack", filter=InputMessagesFilterPhotos
         ):
             pics.append(i)
         id_ = random.choice(pics)
@@ -113,7 +115,7 @@ async def logo_gen(event):
         await tbot.send_file(
             event.chat_id,
             file=flnme,
-            caption="Logo by [ᴘʀɪᴍᴇ ᴍᴇɢᴀ](https://t.me/HachiBotBot)",
+            caption="Logo by [HachiRobot](https://t.me/HachiXBot)",
             force_document=False,
         )
         os.remove(flnme)
@@ -146,7 +148,7 @@ async def logo_(event):
     else:
         pics = []
         async for i in ubot2.iter_messages(
-            "@Hachilogopack", filter=InputMessagesFilterPhotos
+            "@Primelogopack", filter=InputMessagesFilterPhotos
         ):
             pics.append(i)
         id_ = random.choice(pics)
@@ -156,7 +158,7 @@ async def logo_(event):
     if not bg_:
         pics = []
         async for i in ubot2.iter_messages(
-            "@Hachilogopack", filter=InputMessagesFilterPhotos
+            "@Primelogopack", filter=InputMessagesFilterPhotos
         ):
             pics.append(i)
         id_ = random.choice(pics)
