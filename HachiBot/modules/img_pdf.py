@@ -81,7 +81,7 @@ async def convert(
                 "Size": f"{pdf.__sizeof__() / (10**6)}MB",
                 "Pages": len(documents),
                 "Took": f"{elapsed}s",
-                "Powered By [Yesido](t.me/ddodxy) ⚡",
+                "Powered By": f"[Yesido](t.me/ddodxy) ⚡",
             },
         ),
     )
