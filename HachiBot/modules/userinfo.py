@@ -25,17 +25,16 @@ from pyrogram import filters
 from pyrogram.types import Message
 
 import HachiBot.modules.sql.userinfo_sql as sql
+from HachiBot import DRAGONS, dispatcher
 from HachiBot import (
     DEMONS,
     DEV_USERS,
-    DRAGONS,
     INFOPIC,
     OWNER_ID,
     TIGERS,
     WOLVES,
     StartTime,
     SYL
-    dispatcher,
     sw,
 )
 from HachiBot import telethn as HachiBot, pgram
