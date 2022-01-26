@@ -31,7 +31,7 @@ from pyrogram import filters
 from pyrogram.types import Message
 
 from HachiBot import pbot as app
-from HachiBot.core.utils.errors import capture_err
+from HachiBot.utils.errors import capture_err
 from HachiBot.core.sections import section
 
 
