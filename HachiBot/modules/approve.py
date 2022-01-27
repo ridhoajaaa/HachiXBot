@@ -13,7 +13,7 @@ from telegram.error import BadRequest
 
 @loggable
 @user_admin
-def approve(update, context):
+def free(update, context):
     message = update.effective_message
     chat_title = message.chat.title
     chat = update.effective_chat
@@ -199,13 +199,13 @@ That's what approvals are for - approve of trustworthy users to allow them to se
 *Admin commands:*
 
 ❂ /approval*:* Check a user's approval status in this chat.
-❂ /approve*:* Approve of a user. Locks, blacklists, and antiflood won't apply to them anymore.
+❂ /free*:* Approve of a user. Locks, blacklists, and antiflood won't apply to them anymore.
 ❂ /unapprove*:* Unapprove of a user. They will now be subject to locks, blacklists, and antiflood again.
 ❂ /approved*:* List all approved users.
 ❂ /unapproveall*:* Unapprove *ALL* users in a chat. This cannot be undone.
 """
 
-APPROVE = DisableAbleCommandHandler("approve", approve, run_async=True)
+FREE = DisableAbleCommandHandler("free", approve, run_async=True)
 DISAPPROVE = DisableAbleCommandHandler("unapprove", disapprove, run_async=True)
 APPROVED = DisableAbleCommandHandler("approved", approved, run_async=True)
 APPROVAL = DisableAbleCommandHandler("approval", approval, run_async=True)
@@ -214,7 +214,7 @@ UNAPPROVEALL_BTN = CallbackQueryHandler(
     unapproveall_btn, pattern=r"unapproveall_.*", run_async=True
 )
 
-dispatcher.add_handler(APPROVE)
+dispatcher.add_handler(FREE)
 dispatcher.add_handler(DISAPPROVE)
 dispatcher.add_handler(APPROVED)
 dispatcher.add_handler(APPROVAL)
@@ -222,5 +222,5 @@ dispatcher.add_handler(UNAPPROVEALL)
 dispatcher.add_handler(UNAPPROVEALL_BTN)
 
 __mod_name__ = "Approvals"
-__command_list__ = ["approve", "unapprove", "approved", "approval"]
-__handlers__ = [APPROVE, DISAPPROVE, APPROVED, APPROVAL]
+__command_list__ = ["free", "unapprove", "approved", "approval"]
+__handlers__ = [FREE, DISAPPROVE, APPROVED, APPROVAL]
