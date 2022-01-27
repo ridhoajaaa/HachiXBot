@@ -205,7 +205,7 @@ That's what approvals are for - approve of trustworthy users to allow them to se
 ❂ /unapproveall*:* Unapprove *ALL* users in a chat. This cannot be undone.
 """
 
-FREE = DisableAbleCommandHandler("free", approve, run_async=True)
+FREE = DisableAbleCommandHandler("free", free, run_async=True)
 DISAPPROVE = DisableAbleCommandHandler("unapprove", disapprove, run_async=True)
 APPROVED = DisableAbleCommandHandler("approved", approved, run_async=True)
 APPROVAL = DisableAbleCommandHandler("approval", approval, run_async=True)
