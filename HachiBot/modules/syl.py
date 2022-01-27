@@ -153,7 +153,7 @@ def bluemoon_callback(update: Update, context: CallbackContext, should_message=T
 BLUEMOON_HANDLER = CommandHandler("syl", bluemoon, run_async=True)
 ADD_SYL_HANDLER = CallbackQueryHandler(syladd, pattern=r"add_syl", run_async=True)
 RM_SYL_HANDLER = CallbackQueryHandler(sylrm, pattern=r"rm_syl", run_async=True)
-BLUEMOON_HANDLERK = MessageHandler(filters=Filters.all & Filters.group, callback=bluemoon_callback)
+BLUEMOON_HANDLERK = MessageHandler(filters=Filters.all & Filters.chat_type.groups, callback=bluemoon_callback)
 
 dispatcher.add_handler(ADD_SYL_HANDLER)
 dispatcher.add_handler(BLUEMOON_HANDLER)
