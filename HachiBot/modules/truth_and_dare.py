@@ -1,23 +1,24 @@
-import requests
-
-from HachiBot.events import register
-
-
-@register(pattern="^/truth ?(.*)")
-async def _(td):
-    try:
-        kuntul = requests.get("https://api-tede.herokuapp.com/api/truth").json()
-        results = f"**{kuntul['message']}**"
-        return await td.reply(results)
-    except Exception:
-        await td.reply("`Sedang Bermasalah...`")
+import html
+import random
+import HachiBot.modules.truth_and_dare_string as truth_and_dare_string
+from HachiBot import dispatcher
+from telegram import ParseMode, Update, Bot
+from HachiBot.modules.disable import DisableAbleCommandHandler
+from telegram.ext import CallbackContext, run_async
 
 
-@register(pattern="^/dare ?(.*)")
-async def _(dr):
-    try:
-        kuntul = requests.get("https://api-tede.herokuapp.com/api/dare").json()
-        results = f"**{kuntul['message']}**"
-        return await dr.reply(results)
-    except Exception:
-        await dr.reply("`Sedang Bermasalah...`")
+def truth(update: Update, context: CallbackContext):
+    args = context.args
+    update.effective_message.reply_text(random.choice(truth_and_dare_string.TRUTH))
+
+
+def dare(update: Update, context: CallbackContext):
+    args = context.args
+    update.effective_message.reply_text(random.choice(truth_and_dare_string.DARE))
+
+
+TRUTH_HANDLER = DisableAbleCommandHandler("truth", truth, run_async=True)
+DARE_HANDLER = DisableAbleCommandHandler("dare", dare, run_async=True)
+
+dispatcher.add_handler(TRUTH_HANDLER)
+dispatcher.add_handler(DARE_HANDLER)

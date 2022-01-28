@@ -267,21 +267,21 @@ def info(update: Update, context: CallbackContext):
     rep = message.reply_text("<code>Appraising...</code>", parse_mode=ParseMode.HTML)
 
     text = (
-        f"╔━⊰✦✪「 <b> Appraisal Results:</b> 」✪✦⊱━╗\n"
-        f"❂ ID: <code>{user.id}</code>\n"
-        f"❂ First Name: {html.escape(user.first_name)}"
+        f"╔═══✦✪「 <b> Appraisal Results:</b> 」\n"
+        f"╠  ID: <code>{user.id}</code>\n"
+        f"╠  First Name: {html.escape(user.first_name)}"
     )
 
     if user.last_name:
-        text += f"\n❂ Last Name: {html.escape(user.last_name)}"
+        text += f"\n╠  Last Name: {html.escape(user.last_name)}"
 
     if user.username:
-        text += f"\n❂ Username: @{html.escape(user.username)}"
+        text += f"\n╠  Username: @{html.escape(user.username)}"
 
-    text += f"\n❂ Userlink: {mention_html(user.id, 'link')}"
+    text += f"\n╠  Userlink: {mention_html(user.id, 'link')}"
 
     if chat.type != "private" and user_id != bot.id:
-        _stext = "\n❂ Presence: <code>{}</code>"
+        _stext = "\n╠  Presence: <code>{}</code>"
 
         afk_st = is_user_afk(user.id)
         if afk_st:
@@ -311,22 +311,22 @@ def info(update: Update, context: CallbackContext):
     disaster_level_present = False
 
     if user.id == OWNER_ID:
-        text += "\n\nThe level for my master is Lord As Lord"
+        text += "\n\n*The level for my master is* : Lord As Lord"
         disaster_level_present = True
     elif user.id in DEV_USERS:
-        text += "\n\nThe level for this user is Saint"
+        text += "\n\n*The level for this user is* : Saint"
         disaster_level_present = True
     elif user.id in DRAGONS:
-        text += "\n\nThe level for this user is Shadow Slayer"
+        text += "\n\n*The level for this user is* : Shadow Slayer"
         disaster_level_present = True
     elif user.id in DEMONS:
-        text += "\n\nThe level for this user is Guardian"
+        text += "\n\n*The level for this user is* : Guardian"
         disaster_level_present = True
     elif user.id in TIGERS:
-        text += "\n\nThe level for this user is Commander"
+        text += "\n\n*The level for this user is* : Commander"
         disaster_level_present = True
     elif user.id in WOLVES:
-        text += "\n\nThe level for this user is Villain"
+        text += "\n\n*The level for this user is* : Villain"
         disaster_level_present = True
     elif user.id == 1482952149:
         text += "\n\nCo-Owner Of A Bot. Queen Of @Badboyanim. Bot Name Inspired From Tantei Wa Mou, Shindeiru."
@@ -376,6 +376,9 @@ def info(update: Update, context: CallbackContext):
                                 "Disaster", url="https://t.me/HachiXLogs/114"
                             ),
                         ],
+                        [
+                            InlineKeyboardButton(" [❌] ", callback_data="close"),
+                        ],
                     ]
                 ),
                 parse_mode=ParseMode.HTML,
@@ -392,8 +395,11 @@ def info(update: Update, context: CallbackContext):
                                 "Health", url="https://t.me/HachiXLogs/116"
                             ),
                             InlineKeyboardButton(
-                                "Levelling", url="https://t.me/HachiXLogs/114"
+                                "Disaster", url="https://t.me/HachiXLogs/114"
                             ),
+                        ],
+                        [
+                            InlineKeyboardButton(" [❌] ", callback_data="close"),
                         ],
                     ]
                 ),
@@ -690,7 +696,9 @@ When marked as AFK, any mentions will be replied to with a message to say you're
 » /info: get information about a user.
 
 *What is that health thingy?*
-Come and see [HP System explained](https://t.me/OnePunchUpdates/192)
+Come and see ;
+[HP System explained](https://t.me/HachiXLogs/116)
+[Disaster Levelling](https://t.me/HachiXLogs/114)
 """
 
 __mod_name__ = "Info & AFK"

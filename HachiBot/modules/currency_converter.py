@@ -41,7 +41,7 @@ def convert(update: Update, context: CallbackContext):
         )
 
     elif len(args) == 1:
-        update.effective_message.reply_text(__help__, parse_mode=ParseMode.MARKDOWN)
+        update.effective_message.reply_text(__HELP__, parse_mode=ParseMode.MARKDOWN)
 
     else:
         update.effective_message.reply_text(
