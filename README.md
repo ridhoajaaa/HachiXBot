@@ -18,21 +18,17 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/cfb691a93a064d9ea753ef2b5fccf797)](https://www.codacy.com/manual/ridhoajaaa/HachiXBot?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ridhoajaaa/HachiXBot&amp;utm_campaign=Badge_Grade)
 
 
-A Telegram Python bot running on python3 forked with saitama and DiasyX with a sqlalchemy database and an entirely themed persona to make Hachi fun and good management for you in your groups.
+Originally a marie fork - HachiXBot has evolved further and was built to be more useful for Anime Chats.
 
-Can be found on telegram as [HachiXBot](https://t.me/HachiXBot).
+## A Powerful and Modular
 
-The Support group can be reached out to at [Hachi Support](https://t.me/demonszxx), where you can ask for help , discover new features, report bugs, and stay in the loop whenever a new update is available. 
-
-
-News channel as at [Hachi Updates](https:xnxx.com)
-
+Hachi Goemon is a Characther powerful in anime and modular telegram group management bot built using python3 and sqlalchemy. Literally she can do anything to help you make your group a better place like any other bot and she's painted with anime theme for weeb lover's.
 
 ### Deploy To Heroku 
 
+The easiest way to deploy this Bot is via Heroku.
 
 <p align="center"><a href="https://heroku.com/deploy?template=https://github.com/ridhoajaaa/HachiXBot"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku" width="220" height="34.45"/></a></p>
-
 
 ## Bot stuff
 
