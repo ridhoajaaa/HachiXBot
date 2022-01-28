@@ -12,7 +12,7 @@ from telethon import events
 from telethon.tl.types import ChatBannedRights
 from pymongo import MongoClient
 
-from HachiBot.utils.pluginhelpers import is_admin
+from HachiBot.utils.pluginhelper import is_admin
 from HachiBot.events import register
 from HachiBot.modules.sql.nsfw_watch_sql import (
     add_nsfwatch,
