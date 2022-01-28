@@ -89,25 +89,24 @@ Maintained by : [𝗬𝗲𝘀𝗶𝗱𝗼.](https://t.me/ddodxy)
 • *Uptime:* `{}`
 • `{}` *Users, across* `{}` *chats.*
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
-✪ Click the /help button to learn more how to use me. ✪ 
+✪ Hit /help to see my available commands. ✪ 
 """
 
 buttons = [
         [
+        InlineKeyboardButton(text=" ｢ AboutHachi 」", callback_data="hachi_"),
+        InlineKeyboardButton(text=" ｢ GetHelp 」", callback_data="help_back"),
+    ],
+    [
         InlineKeyboardButton(
-            text="➕️ Add Hachi to your group ➕️", url="t.me/HachiXBot?startgroup=true"
+            text=" ➕ ｢ Kuciose Saya 」➕ ",
+            url="t.me/HachiXBot?startgroup=true",
         ),
     ],
     [
-        InlineKeyboardButton(text="Support", url="https://t.me/demonszxx"
-        ),
-        InlineKeyboardButton(
-            text="TryInline", switch_inline_query_current_chat=""
-        ),
-    ],
-    [
-        InlineKeyboardButton(text="Help & Commands❔", callback_data="help_back"
-        ),
+        InlineKeyboardButton(text=" ｢ Support 」", url="http://t.me/demonszxx"),
+        InlineKeyboardButton(text=" [❌] ", callback_data="close"),
+        InlineKeyboardButton(text=" ｢ Update 」", url="http://t.me/ppppppppppppppppqq"),
     ],
 ]
 
@@ -118,7 +117,7 @@ Click on the button bellow to get description about specifics command."""
 HACHI_IMG = "https://telegra.ph/file/f2a033fd4e10fbee49551.jpg"
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
- You can support the project by contacting @ddodxu \
+ You can support the project by contacting @ddodxy \
  Supporting isnt always financial! \
  Those who cannot provide monetary support are welcome to help us develop the bot at ."""
 
