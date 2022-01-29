@@ -82,14 +82,16 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-Halo Tot, [👋](https://telegra.ph/file/85f3dfb199e8b3e60fbd0.jpg) I'm {}.
+Hello there, [👋](https://telegra.ph/file/ac893610cae84f302b2da.jpg) I'm {}.
 Im Powerfull Management Bot And I Will Help In Managing Your Group.
-*Maintained by* : [𝗬𝗲𝘀𝗶𝗱𝗼.](https://t.me/ddodxy).
+Maintained by : [Aryza](https://t.me/idzxartez)
+Founder And Dev Of : [IDZEROID SYNDICATES](https://t.me/idzeroidsupport).
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
 • *Uptime:* `{}`
 • `{}` *Users, across* `{}` *chats.*
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
-✪ Hit /help to see my available commands. ✪ 
+Made specifically to manage your group , I specialize in managing Entertainment and all type groups and channels.
+✪ Make sure you read *DETAILS* Section Below ✪ 
 """
 
 buttons = [
