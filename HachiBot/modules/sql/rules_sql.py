@@ -53,3 +53,11 @@ def num_chats():
         return SESSION.query(func.count(distinct(Rules.chat_id))).scalar()
     finally:
         SESSION.close()
+
+
+def migrate_chat(old_chat_id, new_chat_id):
+    with INSERTION_LOCK:
+        chat = SESSION.query(Rules).get(str(old_chat_id))
+        if chat:
+            chat.chat_id = str(new_chat_id)
+        SESSION.commit()

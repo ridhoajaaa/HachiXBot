@@ -32,7 +32,7 @@ GKICK_ERRORS = {
     "User not found"
 }
 
-@run_async
+
 def gkick(bot: Bot, update: Update, args: List[str]):
     message = update.effective_message
     user_id = extract_user(message, args)
@@ -105,7 +105,7 @@ def __user_info__(user_id):
             text = text.format("<b>No</b>")
     return text
 
-@run_async
+
 def gkickset(bot: Bot, update: Update, args: List[str]):
     message = update.effective_message
     user_id, value = extract_user_and_text(message, args)
@@ -164,9 +164,9 @@ def gkickreset(bot: Bot, update: Update, args: List[str]):
 
 			
 GKICK_HANDLER = CommandHandler("gkick", gkick, pass_args=True,
-                              filters=CustomFilters.sudo_filter | CustomFilters.support_filter)
-SET_HANDLER = CommandHandler("gkickset", gkickset, pass_args=True,filters=Filters.user(OWNER_ID))
-RESET_HANDLER = CommandHandler("gkickreset", gkickreset, pass_args=True,filters=Filters.user(OWNER_ID))
+                              filters=CustomFilters.sudo_filter | CustomFilters.support_filter, run_async=True)
+SET_HANDLER = CommandHandler("gkickset", gkickset, pass_args=True,filters=Filters.user(OWNER_ID), run_async=True)
+RESET_HANDLER = CommandHandler("gkickreset", gkickreset, pass_args=True,filters=Filters.user(OWNER_ID), run_async=True)
 
 dispatcher.add_handler(GKICK_HANDLER)
 dispatcher.add_handler(SET_HANDLER)

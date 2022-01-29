@@ -7,7 +7,7 @@ from telegram import Update
 from telegram.ext import CallbackContext, run_async
 
 
-@run_async
+
 def wall(update: Update, context: CallbackContext):
     chat_id = update.effective_chat.id
     msg = update.effective_message
@@ -54,5 +54,5 @@ def wall(update: Update, context: CallbackContext):
 
 #Thank you Alpha Coders for the wallpaper API and support
 
-WALLPAPER_HANDLER = DisableAbleCommandHandler("wall", wall)
+WALLPAPER_HANDLER = DisableAbleCommandHandler("wall", wall, run_async=True)
 dispatcher.add_handler(WALLPAPER_HANDLER)
