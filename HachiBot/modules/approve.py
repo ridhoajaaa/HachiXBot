@@ -6,6 +6,7 @@ from telegram.ext import CallbackContext, CallbackQueryHandler
 import HachiBot.modules.sql.approve_sql as sql
 from HachiBot.modules.helper_funcs.chat_status import user_admin
 from HachiBot.modules.log_channel import loggable
+from HachiBot.modules.helper_funcs.anonymous import user_admin, AdminPerms
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton, Update
 from telegram.utils.helpers import mention_html
 from telegram.error import BadRequest
