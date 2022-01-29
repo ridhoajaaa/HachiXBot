@@ -1,6 +1,6 @@
 # (c) @JigarVarma2005
 # Edit codes at your own risk
-# the file part of aries rewriten by @IdzXartez
+# the file part of HachiBot rewriten by @IdzXartez
 # from config import Config
 
 import asyncio
@@ -12,9 +12,9 @@ from pyrogram.errors import UserNotParticipant
 from pyrogram.types import ChatPermissions, InlineKeyboardButton, InlineKeyboardMarkup
 from requests import get
 
-from aries import BOT_USERNAME, DEV_USERS, pbot
-from aries.modules.mongo.captcha_mongo import manage_db
-from aries.utils.markup import MakeCaptchaMarkup
+from HachiBot import BOT_USERNAME, DEV_USERS, pbot
+from HachiBot.modules.mongo.captcha_mongo import manage_db
+from HachiBot.utils.markup import MakeCaptchaMarkup
 
 # Local database for saving user info
 LocalDB = {}
