@@ -103,6 +103,7 @@ if ENV:
     MONGO_DB = os.environ.get("MONGO_DB", "HachiBot")
     ARQ_API = os.environ.get("ARQ_API", None)
     DONATION_LINK = os.environ.get("DONATION_LINK")
+    VIRUS_API_KEY = os.environ.get("VIRUS_API_KEY", None)
     LOAD = os.environ.get("LOAD", "").split()
     HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", None)
     HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME", None)
@@ -205,6 +206,7 @@ else:
     CASH_API_KEY = Config.CASH_API_KEY
     TIME_API_KEY = Config.TIME_API_KEY
     WALL_API = Config.WALL_API
+    VIRUS_API_KEY = Config.VIRUS_API_KEY
     REDIS_URL = Config.REDIS_URL
     MONGO_PORT = Config.MONGO_PORT
     SUPPORT_CHAT = Config.SUPPORT_CHAT

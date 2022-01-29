@@ -25,6 +25,7 @@ aiohttp
 Pillow
 CurrencyConverter
 googletrans
+cloudmersive_virus_api_client
 google-trans-new
 jikanpy
 speedtest-cli

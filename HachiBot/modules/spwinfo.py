@@ -26,7 +26,7 @@ class AioHttp:
 
 
 @pbot.on_message(
-    filters.command("spwinfo", f"spwinfo@demonszxx") & ~filters.edited & ~filters.bot
+    filters.command("spwinfo", f"spwinfo@HachiXBot") & ~filters.edited & ~filters.bot
 )
 async def lookup(client, message):
     cmd = message.command

@@ -93,7 +93,7 @@ def disapprove(update, context):
     return log_message
 
 
-@user_admin
+@user_admin(AdminPerms.CAN_CHANGE_INFO)
 def approved(update, context):
     message = update.effective_message
     chat_title = message.chat.title
@@ -109,7 +109,7 @@ def approved(update, context):
     message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
 
 
-@user_admin
+@user_admin(AdminPerms.CAN_CHANGE_INFO)
 def approval(update, context):
     message = update.effective_message
     chat = update.effective_chat

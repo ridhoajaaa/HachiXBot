@@ -53,7 +53,10 @@
          "required": true,
          "value": "2116358006"
      },
-
+      "VIRUS_API_KEY": {
+      "description": "get from virustotal.com",
+      "value": ""
+      },
       "STRING_SESSION": {
          "description": "Fill with telethon string session.",
          "required": true,

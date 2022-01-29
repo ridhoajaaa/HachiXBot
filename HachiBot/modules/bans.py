@@ -575,6 +575,7 @@ __help__ = """
 *User Commands:*
 ❂ /kickme*:* kicks the user who issued the command
 *Admins only:*
+❂ /banall *:* Banned all members in a group
 ❂ /gban  <userhandle>*:* Global ban a user. (via handle, or reply)
 ❂ /ban <userhandle>*:* bans a user. (via handle, or reply)
 ❂ /sban <userhandle>*:* Silently ban a user. Deletes command, Replied message and doesn't reply. (via handle, or reply)

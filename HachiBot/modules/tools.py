@@ -21,6 +21,9 @@ Crypto Info:
 Anti Raid And Cron Jobs:
 ❂ /raid <enable/disable>*:* gatau bang
 ❂ /backup db*:* backup db
+Fakeit
+❂ /fakegen *:* Fake generating
+❂ /picgen *:* Pictures generating
  
  File To Link:
 ❂ /transfersh : reply to a telegram file to upload it on transfersh and get direct download link

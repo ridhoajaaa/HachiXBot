@@ -288,6 +288,7 @@ __help__ = """
 ❂ /country <country name>*:* Gathering info about given country
 ❂ /imdb <Movie name>*:* Get full info about a movie with imdb.com
 ❂ /cs *:* Latest live scores from cricinfo
+❂ /pokedex <pokemon>*:* For get statistik pokemon
 ❂ /covid <country>*:* get data corona
 ❂ Hachi <query>*:* Hachi answers the query
   💡Ex: `Hachi where is bogay`
