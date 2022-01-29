@@ -82,7 +82,7 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-Allo Tot {}, I'am *Goemon Hachisuka*
+Allo Tott {}, I'am *Goemon Hachisuka*
 ✪ Powerfull Management Bot To Help In Managing Your Group.[✨](https://telegra.ph/file/85f3dfb199e8b3e60fbd0.jpg)
 ✪ Maintenned By : [𝗬𝗲𝘀𝗶𝗱𝗼.](https://t.me/ddodxy)
 
