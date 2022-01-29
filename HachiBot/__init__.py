@@ -68,6 +68,11 @@ if ENV:
         WHITELIST_USERS = {
             int(x) for x in os.environ.get("WHITELIST_USERS", "").split()
         }
+    except ValueError:
+        raise Exception(
+            "[HachiXBot] Your whitelisted users list does not contain valid integers."
+        )
+
     try:
         DRAGONS = {int(x) for x in os.environ.get("DRAGONS", "").split()}
         DEV_USERS = {int(x) for x in os.environ.get("DEV_USERS", "").split()}
