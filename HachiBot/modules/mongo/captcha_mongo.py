@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 
-from aries import MONGO_DB_URI
+from HachiBot import MONGO_DB_URI
 
 
 class manage_db:
