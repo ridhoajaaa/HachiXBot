@@ -68,7 +68,7 @@ if ENV:
         WHITELIST_USERS = {
             int(x) for x in os.environ.get("WHITELIST_USERS", "").split()
         }
-    try
+    try:
         DRAGONS = {int(x) for x in os.environ.get("DRAGONS", "").split()}
         DEV_USERS = {int(x) for x in os.environ.get("DEV_USERS", "").split()}
     except ValueError:
