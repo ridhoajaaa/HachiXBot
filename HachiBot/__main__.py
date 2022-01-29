@@ -82,10 +82,9 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-Alo bang {}, Iam Hachisuka [👋](https://telegra.ph/file/85f3dfb199e8b3e60fbd0.jpg)
-Powerfull Management Bot To Help In Managing Your Group.
-
-<b>Maintained by</b> : [𝗬𝗲𝘀𝗶𝗱𝗼.](https://t.me/ddodxy)
+Halo Tot, [👋](https://telegra.ph/file/85f3dfb199e8b3e60fbd0.jpg) I'm {}.
+Im Powerfull Management Bot And I Will Help In Managing Your Group.
+*Maintained by* : [𝗬𝗲𝘀𝗶𝗱𝗼.](https://t.me/ddodxy).
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
 • *Uptime:* `{}`
 • `{}` *Users, across* `{}` *chats.*

@@ -246,11 +246,11 @@ def user_admin_no_reply(func):
 def user_not_admin(func):
     @wraps(func)
     def is_not_admin(update: Update, context: CallbackContext, *args, **kwargs):
-        bot = context.bot
+        context.bot
         user = update.effective_user
-        chat = update.effective_chat
+        update.effective_chat
 
-        if user and not is_user_admin(chat, user.id):
+        if user and not is_user_admin(update, user.id):
             return func(update, context, *args, **kwargs)
         if not user:
             pass
