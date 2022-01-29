@@ -36,6 +36,7 @@ def is_sudo_plus(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
 def is_user_admin(update: Update, context: CallbackContext, user_id: int, member: ChatMember = None) -> bool:
     chat = update.effective_chat
     msg = update.effective_message
+    user = update.effective_user
     if (
             chat.type == "private"
             or user_id in SUDO_USERS
