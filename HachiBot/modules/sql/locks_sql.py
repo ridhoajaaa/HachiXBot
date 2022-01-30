@@ -1,9 +1,8 @@
-# New chat added -> setup permissions
 import threading
 
-from sqlalchemy import Column, String, Boolean
+from sqlalchemy import Boolean, Column, String
 
-from HachiBot.modules.sql import SESSION, BASE
+from HachiBot.modules.sql import BASE, SESSION
 
 
 class Permissions(BASE):
@@ -27,6 +26,20 @@ class Permissions(BASE):
     button = Column(Boolean, default=False)
     egame = Column(Boolean, default=False)
     inline = Column(Boolean, default=False)
+    apk = Column(Boolean, default=False)
+    doc = Column(Boolean, default=False)
+    exe = Column(Boolean, default=False)
+    jpg = Column(Boolean, default=False)
+    mp3 = Column(Boolean, default=False)
+    pdf = Column(Boolean, default=False)
+    txt = Column(Boolean, default=False)
+    xml = Column(Boolean, default=False)
+    zip = Column(Boolean, default=False)
+    docx = Column(Boolean, default=False)
+    py = Column(Boolean, default=False)
+    svg = Column(Boolean, default=False)
+    targz = Column(Boolean, default=False)
+    wav = Column(Boolean, default=False)
 
     def __init__(self, chat_id):
         self.chat_id = str(chat_id)  # ensure string
@@ -47,6 +60,20 @@ class Permissions(BASE):
         self.button = False
         self.egame = False
         self.inline = False
+        self.apk = False
+        self.doc = False
+        self.exe = False
+        self.jpg = False
+        self.mp3 = False
+        self.pdf = False
+        self.txt = False
+        self.xml = False
+        self.zip = False
+        self.docx = False
+        self.py = False
+        self.svg = False
+        self.targz = False
+        self.wav = False
 
     def __repr__(self):
         return "<Permissions for %s>" % self.chat_id
@@ -145,6 +172,34 @@ def update_lock(chat_id, lock_type, locked):
             curr_perm.egame = locked
         elif lock_type == "inline":
             curr_perm.inline = locked
+        elif lock_type == "apk":
+            curr_perm.apk = locked
+        elif lock_type == "doc":
+            curr_perm.doc = locked
+        elif lock_type == "exe":
+            curr_perm.exe = locked
+        elif lock_type == "jpg":
+            curr_perm.jpg = locked
+        elif lock_type == "mp3":
+            curr_perm.mp3 = locked
+        elif lock_type == "pdf":
+            curr_perm.pdf = locked
+        elif lock_type == "txt":
+            curr_perm.txt = locked
+        elif lock_type == "xml":
+            curr_perm.xml = locked
+        elif lock_type == "zip":
+            curr_perm.zip = locked
+        elif lock_type == "docx":
+            curr_perm.doc = locked
+        elif lock_type == "py":
+            curr_perm.py = locked
+        elif lock_type == "svg":
+            curr_perm.svg = locked
+        elif lock_type == "targz":
+            curr_perm.tar = locked
+        elif lock_type == "wav":
+            curr_perm.wav = locked
 
         SESSION.add(curr_perm)
         SESSION.commit()
@@ -180,41 +235,68 @@ def is_locked(chat_id, lock_type):
     if not curr_perm:
         return False
 
-    elif lock_type == "sticker":
+    if lock_type == "sticker":
         return curr_perm.sticker
-    elif lock_type == "photo":
+    if lock_type == "photo":
         return curr_perm.photo
-    elif lock_type == "audio":
+    if lock_type == "audio":
         return curr_perm.audio
-    elif lock_type == "voice":
+    if lock_type == "voice":
         return curr_perm.voice
-    elif lock_type == "contact":
+    if lock_type == "contact":
         return curr_perm.contact
-    elif lock_type == "video":
+    if lock_type == "video":
         return curr_perm.video
-    elif lock_type == "document":
+    if lock_type == "document":
         return curr_perm.document
-    elif lock_type == "gif":
+    if lock_type == "gif":
         return curr_perm.gif
-    elif lock_type == "url":
+    if lock_type == "url":
         return curr_perm.url
-    elif lock_type == "bots":
+    if lock_type == "bots":
         return curr_perm.bots
-    elif lock_type == "forward":
+    if lock_type == "forward":
         return curr_perm.forward
-    elif lock_type == "game":
+    if lock_type == "game":
         return curr_perm.game
-    elif lock_type == "location":
+    if lock_type == "location":
         return curr_perm.location
-    elif lock_type == "rtl":
+    if lock_type == "rtl":
         return curr_perm.rtl
-    elif lock_type == "button":
+    if lock_type == "button":
         return curr_perm.button
-    elif lock_type == "egame":
+    if lock_type == "egame":
         return curr_perm.egame
-    elif lock_type == "inline":
+    if lock_type == "inline":
         return curr_perm.inline
-
+    if lock_type == "apk":
+        return curr_perm.apk
+    if lock_type == "doc":
+        return curr_perm.doc
+    if lock_type == "exe":
+        return curr_perm.exe
+    if lock_type == "jpg":
+        return curr_perm.jpg
+    if lock_type == "mp3":
+        return curr_perm.mp3
+    if lock_type == "pdf":
+        return curr_perm.pdf
+    if lock_type == "txt":
+        return curr_perm.txt
+    if lock_type == "xml":
+        return curr_perm.xml
+    if lock_type == "zip":
+        return curr_perm.zip
+    if lock_type == "docx":
+        return curr_perm.docx
+    if lock_type == "py":
+        return curr_perm.py
+    if lock_type == "svg":
+        return curr_perm.svg
+    if lock_type == "targz":
+        return curr_perm.targz
+    if lock_type == "wav":
+        return curr_perm.wav
 
 def is_restr_locked(chat_id, lock_type):
     curr_restr = SESSION.query(Restrictions).get(str(chat_id))
@@ -225,13 +307,13 @@ def is_restr_locked(chat_id, lock_type):
 
     if lock_type == "messages":
         return curr_restr.messages
-    elif lock_type == "media":
+    if lock_type == "media":
         return curr_restr.media
-    elif lock_type == "other":
+    if lock_type == "other":
         return curr_restr.other
-    elif lock_type == "previews":
+    if lock_type == "previews":
         return curr_restr.preview
-    elif lock_type == "all":
+    if lock_type == "all":
         return (
             curr_restr.messages
             and curr_restr.media
