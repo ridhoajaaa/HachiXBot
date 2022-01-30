@@ -1,3 +1,21 @@
+#  HachiBotRobot
+#  Copyright (C) 2017-2019, Paul Larsen
+#  Copyright (C) 2022, IDNCoderX Team, <https://github.com/IDN-C-X/HachiBotRobot>
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU Affero General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#  GNU Affero General Public License for more details.
+#
+#  You should have received a copy of the GNU Affero General Public License
+#  along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+
 # New chat added -> setup permissions
 import threading
 
@@ -72,11 +90,7 @@ class Restrictions(BASE):
         return "<Restrictions for %s>" % self.chat_id
 
 
-# For those who faced database error, Just uncomment the
-# line below and run bot for 1 time & remove that line!
-
 Permissions.__table__.create(checkfirst=True)
-# Permissions.__table__.drop()
 Restrictions.__table__.create(checkfirst=True)
 
 PERM_LOCK = threading.RLock()
@@ -180,39 +194,39 @@ def is_locked(chat_id, lock_type):
     if not curr_perm:
         return False
 
-    elif lock_type == "sticker":
+    if lock_type == "sticker":
         return curr_perm.sticker
-    elif lock_type == "photo":
+    if lock_type == "photo":
         return curr_perm.photo
-    elif lock_type == "audio":
+    if lock_type == "audio":
         return curr_perm.audio
-    elif lock_type == "voice":
+    if lock_type == "voice":
         return curr_perm.voice
-    elif lock_type == "contact":
+    if lock_type == "contact":
         return curr_perm.contact
-    elif lock_type == "video":
+    if lock_type == "video":
         return curr_perm.video
-    elif lock_type == "document":
+    if lock_type == "document":
         return curr_perm.document
-    elif lock_type == "gif":
+    if lock_type == "gif":
         return curr_perm.gif
-    elif lock_type == "url":
+    if lock_type == "url":
         return curr_perm.url
-    elif lock_type == "bots":
+    if lock_type == "bots":
         return curr_perm.bots
-    elif lock_type == "forward":
+    if lock_type == "forward":
         return curr_perm.forward
-    elif lock_type == "game":
+    if lock_type == "game":
         return curr_perm.game
-    elif lock_type == "location":
+    if lock_type == "location":
         return curr_perm.location
-    elif lock_type == "rtl":
+    if lock_type == "rtl":
         return curr_perm.rtl
-    elif lock_type == "button":
+    if lock_type == "button":
         return curr_perm.button
-    elif lock_type == "egame":
+    if lock_type == "egame":
         return curr_perm.egame
-    elif lock_type == "inline":
+    if lock_type == "inline":
         return curr_perm.inline
 
 
@@ -225,13 +239,13 @@ def is_restr_locked(chat_id, lock_type):
 
     if lock_type == "messages":
         return curr_restr.messages
-    elif lock_type == "media":
+    if lock_type == "media":
         return curr_restr.media
-    elif lock_type == "other":
+    if lock_type == "other":
         return curr_restr.other
-    elif lock_type == "previews":
+    if lock_type == "previews":
         return curr_restr.preview
-    elif lock_type == "all":
+    if lock_type == "all":
         return (
             curr_restr.messages
             and curr_restr.media

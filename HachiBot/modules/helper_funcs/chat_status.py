@@ -41,37 +41,33 @@ def user_can_pin(chat: Chat, user: User, bot_id: int) -> bool:
     return chat.get_member(user.id).can_pin_messages
 
 
-def is_user_admin(update: Update, user_id: int, member: ChatMember = None) -> bool:
-    chat = update.effective_chat
-    msg = update.effective_message
+def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     if (
         chat.type == "private"
-        or user_id in DEMONS
         or user_id in DEV_USERS
+        or user_id in {777000, 1087968824}
         or chat.all_members_are_administrators
-        or (
-            msg.reply_to_message
-            and msg.reply_to_message.sender_chat is not None
-            and msg.reply_to_message.sender_chat.type != "channel"
-        )
     ):
         return True
 
     if not member:
-        # try to fetch from cache first.
-        try:
-            return user_id in ADMIN_CACHE[chat.id]
-        except KeyError:
-            # KeyError happened means cache is deleted,
-            # so query bot api again and return user status
-            # while saving it in cache for future usage...
-            chat_admins = dispatcher.bot.getChatAdministrators(chat.id)
-            admin_list = [x.user.id for x in chat_admins]
-            ADMIN_CACHE[chat.id] = admin_list
+        with THREAD_LOCK:
+            # try to fetch from cache first.
+            try:
+                return user_id in ADMIN_CACHE[chat.id]
+            except KeyError:
+                # keyerror happend means cache is deleted,
+                # so query bot api again and return user status
+                # while saving it in cache for future useage...
+                try:
+                    chat_admins = dispatcher.bot.getChatAdministrators(chat.id)
+                    admin_list = [x.user.id for x in chat_admins]
+                    ADMIN_CACHE[chat.id] = admin_list
 
-            if user_id in admin_list:
-                return True
-            return False
+                    if user_id in admin_list:
+                        return True
+                except Unauthorized:
+                    return False
 
 
 def is_user_mod(update: Update, user_id: int, member: ChatMember = None) -> bool:

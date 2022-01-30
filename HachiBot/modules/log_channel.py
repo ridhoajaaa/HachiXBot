@@ -25,30 +25,30 @@ if is_module_loaded(FILENAME):
 
     def loggable(func):
         @wraps(func)
-        def log_action(
-            update: Update,
-            context: CallbackContext,
-            job_queue: JobQueue = None,
-            *args,
-            **kwargs,
-        ):
-            if not job_queue:
-                result = func(update, context, *args, **kwargs)
-            else:
-                result = func(update, context, job_queue, *args, **kwargs)
-
+        def log_action(update, context, *args, **kwargs):
+            result = func(update, context, *args, **kwargs)
             chat = update.effective_chat
             message = update.effective_message
-
             if result:
-                datetime_fmt = "%H:%M - %d-%m-%Y"
-                result += f"\n<b>Event Stamp</b>: <code>{datetime.utcnow().strftime(datetime_fmt)}</code>"
-
-                if message.chat.type == chat.SUPERGROUP and message.chat.username:
-                    result += f'\n<b>Link:</b> <a href="https://t.me/{chat.username}/{message.message_id}">click here</a>'
+                if chat.type == chat.SUPERGROUP and chat.username:
+                    result += (
+                        "\n<b>Link:</b> "
+                        '<a href="http://telegram.me/{}/{}">click here</a>'.format(
+                            chat.username, message.message_id
+                        )
+                    )
                 log_chat = sql.get_chat_log_channel(chat.id)
                 if log_chat:
-                    send_log(context, log_chat, chat.id, result)
+                    try:
+                        send_log(context.bot, log_chat, chat.id, result)
+                    except Unauthorized:
+                        sql.stop_chat_logging(chat.id)
+
+            elif result != "":
+                LOGGER.warning(
+                    "%s was set as loggable, but had no return statement.",
+                    func,
+                )
 
             return result
 
